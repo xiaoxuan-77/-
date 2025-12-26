@@ -4,26 +4,27 @@ local Whitelisted = {
     ["Kadys5373"] = true,
     ["dt106101zz"] = true,
     ["166788cx"] = true,
-    ["Timmy112406"] = true,
     ["mknhghv"] = true,
- }
+}
 
 local function IsWhitelisted(player)
     return Whitelisted[player.Name] or false
 end
 
 local localPlayer = Players.LocalPlayer
-
 local isLocalPlayerWhitelisted = IsWhitelisted(localPlayer)
 
 if isLocalPlayerWhitelisted then
     StarterGui:SetCore("SendNotification", {
-        Title = "白名單認證",
-        Text = "玩家:"..localPlayer.Name.."檢測完畢",
+        Title = "零域 (ZERO SECTOR)", -- 幫你換了更強的名字
+        Text = "身份認證成功：歡迎回來 " .. localPlayer.Name,
         Duration = 7,
     })
---放腳本
-loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/零"))()
+
+    -- 修正後的 loadstring，使用 HttpGet 並對中文進行編碼
+    local scriptUrl = "https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/%E9%9B%B6"
+    loadstring(game:HttpGet(scriptUrl))()
 else
-    localPlayer:Kick("未公開還拿的到腳本 你被通緝了^^")
+    -- 修正後的 Kick，刪除多餘的引號
+    localPlayer:Kick("【 認證失敗 】\n未公開腳本, 你被通緝了 ^^")
 end
