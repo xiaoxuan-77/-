@@ -2,7 +2,7 @@ local StarterGui = game:GetService("StarterGui")
 local Players = game:GetService("Players")
 local Whitelisted = {
     ["Kadys5373"] = true,
-    ["nuiaKZcFs09y6"] = true,
+    ["dt106101zz"] = true,
     ["166788cx"] = true,
     ["mknhghv"] = true,
  }
