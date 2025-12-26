@@ -22,7 +22,7 @@ if isLocalPlayerWhitelisted then
         Duration = 7,
     })
 --放腳本
-loadstring(game:HttpGet("https://raw.githubusercontent.com/mknhghv/67/refs/heads/main/零中心腳本"))()
+loadstring(game:https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/零"))()
 else
     localPlayer:Kick("未公開還拿的到腳本 你被通緝了^^") ")
 end
