@@ -15,7 +15,7 @@ local Whitelist = {
     ["dt106101zz"] = "B2E1BD72-7B8F-4C4F-AEF7-2371ECDB2D2A",
     ["166788cx"] = "這裡填入他的HWID",
     ["mknhghv"] = "bc20243e-9910-474c-84d1-35376a4ed208",
-    ["suedrr4"] = "這裡填入他的HWID",
+    ["suedrr4"] = "33a9c3c5-2465-48ba-993c-95545dd3d57b",
 }
 
 -- 認證函數
