@@ -42,7 +42,7 @@ local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera 
 local workspace = game:GetService("Workspace")  
 local Player = Players.LocalPlayer  
-local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/mknhghv/67/refs/heads/main/%E9%9B%B6%E8%85%B3%E6%9C%ACui"))()  
+local ui = loadstring(game:HttpGet("https://raw.githubusercontent.com/ni7ykt/test1/refs/heads/main/ui"))()  
 local win = ui:new("零中心")
 local UITab1 = win:Tab("公告",'7734068321')
 local UITab2 = win:Tab("脚本",'7734068321')
@@ -115,15 +115,31 @@ end)
 -- 缝合
 
 about:Button("飞行",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/kismile236/rjrym/refs/heads/main/fly.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/fly"))()
 end)
 
 about:Button("法天象地",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/kismile36/rjrzhongxing/refs/heads/main/rjr/fatianxiangdi"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/法天像地"))()
+end)
+
+about:Button("redz",function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/redz"))()
+end)
+
+about:Button("皮脚本",function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/皮"))()
+end)
+
+local VirtualUser = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:Connect(function()
+    -- 當系統檢測到你閒置時，模擬滑鼠點擊螢幕，這比跳躍更穩
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new(0,0))
+    print("零域 | 已攔截掛機檢測，持續運行中...")
 end)
 
 about:Button("fps优化（关闭不了一点傻逼）",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/kismile236/rjrym/refs/heads/main/fpsboost"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/fps优化"))()
 end)
 
 about:Button("hoho",function()
@@ -305,13 +321,13 @@ attackTab:Textbox("攻速", "ClickDelay", "0.1", function(text)
 	Settings.ClickDelay = num
 end)
 
-attackTab:Toggle("打怪物", "AttackMobsToggle", true, function(state)
+attackTab:Toggle("打怪", "AttackMobsToggle", true, function(state)
 	if _ENV.rz_FastAttack then
 		_ENV.rz_FastAttack.attackMobs = state
 	end
 end)
 
-attackTab:Toggle("打玩家", "AttackPlayersToggle", true, function(state)
+attackTab:Toggle("打人", "AttackPlayersToggle", true, function(state)
 	if _ENV.rz_FastAttack then
 		_ENV.rz_FastAttack.attackPlayers = state
 	end
@@ -583,7 +599,7 @@ local function CreateTracerESP(player)
     end
     
     local tracer = Drawing.new("Line")
-    tracer.Color = Color3.new(1, 0, 0) -- 射线颜色：白色
+    tracer.Color = Color3.new(1, 0, 0) -- 射线颜色：鲜红色
     tracer.Thickness = 2 -- 射线粗细：2像素
     tracer.Transparency = 0.8 -- 射线透明度：80%（半透明效果）
     tracer.Visible = false -- 初始隐藏
@@ -851,4 +867,3 @@ game:GetService("StarterGui"):SetCore("SendNotification",{
 	Text = "加载完成 祝您使用愉快",
 	Duration = 5;
 })
-
