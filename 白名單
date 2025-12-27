@@ -17,6 +17,8 @@ local Whitelist = {
     ["mknhghv"] = "bc20243e-9910-474c-84d1-35376a4ed208",
     ["suedrr4"] = "33a9c3c5-2465-48ba-993c-95545dd3d57b",
     ["msmskven3"] = "c36ce557-a7fc-43d1-8c80-4a5d3102bf7b",
+    ["EKitriney589K5"] = "3715eecf-873c-4e64-9844-cf9beb64ff31",
+    ["jay04_23"] = "f0f83cc1-8fec-4c11-a30d-c62eed7e4b23",
 }
 
 -- 認證函數
