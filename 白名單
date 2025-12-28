@@ -18,6 +18,15 @@ local Whitelist = {
     ["msmskven3"] = "c36ce557-a7fc-43d1-8c80-4a5d3102bf7b",
     ["EKitriney589K5"] = "3715eecf-873c-4e64-9844-cf9beb64ff31",
     ["jay04_23"] = "f0f83cc1-8fec-4c11-a30d-c62eed7e4b23",
+    ["psaabfmiuh"] = "4207417e-f1dd-44cb-904d-995ef8d3a50b",
+    ["Mike60507"] = "a3ef3173-ba29-4ec9-bee2-3a0887d89c29",
+    ["robloxasdft114"] = "",
+    ["Zn6xx"] = "e8ac1481-dccd-48bb-8ee0-50e39dce13e8",
+    ["Timmy112406"] = "",
+    ["Frank198107"] = "8A5714E8-118C-4E19-A91F-EF4D61470762",
+    ["Rgikxqf46001"] = "",
+    ["nsaarhhbic"] = "6ffe8451-ca42-4bca-9b9a-7a52ebbf2148",
+    [""] = "",
 }
 
 -- 認證函數
