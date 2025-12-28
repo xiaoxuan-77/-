@@ -33,7 +33,8 @@ local Whitelist = {
     ["bonk_111111111"] = "39e4653f-ed82-42be-97ba-bb13cdcbebe1",
     ["XanYU0322"] = "2c3fb464-46c4-4632-9368-28fd58a5d546",
     ["Sojater"] = "7444c81e-d945-4a7e-b291-ad575d4cfb11",
-    [""] = "",
+    ["HYHuiBai"] = "b5388211-f375-49a3-8b47-c24625e4302b",
+    ["ziyao_1237"] = "51c46d19-3db1-481b-99a9-66c929d5fa0a",
 }
 
 -- 認證函數
