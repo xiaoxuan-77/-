@@ -35,6 +35,7 @@ local Whitelist = {
     ["Sojater"] = "7444c81e-d945-4a7e-b291-ad575d4cfb11",
     ["HYHuiBai"] = "b5388211-f375-49a3-8b47-c24625e4302b",
     ["ziyao_1237"] = "51c46d19-3db1-481b-99a9-66c929d5fa0a",
+    ["Kadys5373"] = "17DF8986-52EE-402C-B143-25870D344F4F",
 }
 
 -- 認證函數
