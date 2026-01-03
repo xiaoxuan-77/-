@@ -1,0 +1,239 @@
+-- 一鍵隱藏外掛按鈕 v1.0
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local player = Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+-- 刪除舊按鈕
+if PlayerGui:FindFirstChild("HideToggleBtn") then
+    PlayerGui.HideToggleBtn:Destroy()
+end
+
+-- 全局變量
+local isHidden = false
+local hiddenUIs = {}  -- 儲存隱藏的UI
+
+-- 1. 創建隱藏按鈕（永遠在最上層）
+local hideBtn = Instance.new("ScreenGui")
+hideBtn.Name = "HideToggleBtn"
+hideBtn.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+hideBtn.DisplayOrder = 9999  -- 永遠在最上層
+hideBtn.Parent = PlayerGui
+
+-- 主按鈕
+local mainButton = Instance.new("TextButton")
+mainButton.Name = "MainButton"
+mainButton.Size = UDim2.new(0, 50, 0, 50)
+mainButton.Position = UDim2.new(1, -60, 0, 20)  -- 右上角
+mainButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+mainButton.Text = "隱藏"
+mainButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+mainButton.TextSize = 14
+mainButton.Font = Enum.Font.GothamBold
+mainButton.AutoButtonColor = false
+mainButton.ZIndex = 10000
+mainButton.Parent = hideBtn
+
+-- 圓角
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(1, 0)  -- 圓形按鈕
+buttonCorner.Parent = mainButton
+
+-- 陰影
+local buttonShadow = Instance.new("UIStroke")
+buttonShadow.Color = Color3.fromRGB(0, 0, 0)
+buttonShadow.Thickness = 2
+buttonShadow.Transparency = 0.3
+buttonShadow.Parent = mainButton
+
+-- 2. 功能：隱藏/顯示所有外掛UI
+local function toggleAllUIs()
+    isHidden = not isHidden
+    
+    if isHidden then
+        -- 隱藏模式
+        mainButton.Text = "顯示"
+        mainButton.BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+        
+        -- 隱藏所有ScreenGui（除了這個按鈕）
+        hiddenUIs = {}
+        for _, gui in ipairs(PlayerGui:GetChildren()) do
+            if gui:IsA("ScreenGui") and gui.Name ~= "HideToggleBtn" then
+                hiddenUIs[gui] = gui.Enabled
+                gui.Enabled = false
+            end
+        end
+        
+        print("🔴 所有外掛已隱藏")
+    else
+        -- 顯示模式
+        mainButton.Text = "隱藏"
+        mainButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+        
+        -- 恢復所有UI
+        for gui, wasEnabled in pairs(hiddenUIs) do
+            if gui.Parent then
+                gui.Enabled = wasEnabled
+            end
+        end
+        hiddenUIs = {}
+        
+        print("🟢 所有外掛已顯示")
+    end
+end
+
+-- 3. 按鈕事件
+mainButton.MouseButton1Click:Connect(toggleAllUIs)
+
+-- 4. 按鈕動畫效果
+mainButton.MouseEnter:Connect(function()
+    game:GetService("TweenService"):Create(mainButton, TweenInfo.new(0.2), {
+        Size = UDim2.new(0, 55, 0, 55),
+        BackgroundTransparency = 0
+    }):Play()
+end)
+
+mainButton.MouseLeave:Connect(function()
+    game:GetService("TweenService"):Create(mainButton, TweenInfo.new(0.2), {
+        Size = UDim2.new(0, 50, 0, 50),
+        BackgroundTransparency = 0
+    }):Play()
+end)
+
+mainButton.MouseButton1Down:Connect(function()
+    game:GetService("TweenService"):Create(mainButton, TweenInfo.new(0.1), {
+        BackgroundColor3 = Color3.fromRGB(200, 80, 80)
+    }):Play()
+end)
+
+mainButton.MouseButton1Up:Connect(function()
+    if isHidden then
+        game:GetService("TweenService"):Create(mainButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(100, 200, 100)
+        }):Play()
+    else
+        game:GetService("TweenService"):Create(mainButton, TweenInfo.new(0.2), {
+            BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+        }):Play()
+    end
+end)
+
+-- 5. 快捷鍵支持（F4隱藏/顯示）
+UserInputService.InputBegan:Connect(function(input, processed)
+    if processed then return end
+    
+    if input.KeyCode == Enum.KeyCode.F4 then
+        toggleAllUIs()
+    end
+end)
+
+-- 6. 可拖動功能
+local dragging = false
+local dragStart
+local startPos
+
+mainButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainButton.Position
+    end
+end)
+
+mainButton.InputChanged:Connect(function(input)
+    if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = input.Position - dragStart
+        mainButton.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+mainButton.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+-- 7. 狀態指示燈
+local statusIndicator = Instance.new("Frame")
+statusIndicator.Name = "StatusIndicator"
+statusIndicator.Size = UDim2.new(0, 10, 0, 10)
+statusIndicator.Position = UDim2.new(1, -15, 1, -15)
+statusIndicator.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+statusIndicator.BorderSizePixel = 0
+statusIndicator.Parent = mainButton
+
+local indicatorCorner = Instance.new("UICorner")
+indicatorCorner.CornerRadius = UDim.new(1, 0)
+indicatorCorner.Parent = statusIndicator
+
+-- 更新指示燈
+local function updateIndicator()
+    if isHidden then
+        statusIndicator.BackgroundColor3 = Color3.fromRGB(50, 255, 50)
+    else
+        statusIndicator.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+    end
+end
+
+-- 監聽狀態變化
+mainButton:GetPropertyChangedSignal("Text"):Connect(updateIndicator)
+
+-- 8. 工具提示
+local tooltip = Instance.new("TextLabel")
+tooltip.Name = "Tooltip"
+tooltip.Text = "點擊隱藏/顯示所有外掛\n快捷鍵: F4"
+tooltip.TextColor3 = Color3.fromRGB(255, 255, 255)
+tooltip.TextSize = 12
+tooltip.Size = UDim2.new(0, 120, 0, 40)
+tooltip.Position = UDim2.new(0, 55, 0, 0)
+tooltip.BackgroundColor3 = Color3.fromRGB(40, 40, 60)
+tooltip.BackgroundTransparency = 0.8
+tooltip.Visible = false
+tooltip.TextWrapped = true
+tooltip.Parent = mainButton
+
+local tooltipCorner = Instance.new("UICorner")
+tooltipCorner.CornerRadius = UDim.new(0, 6)
+tooltipCorner.Parent = tooltip
+
+-- 滑鼠懸停顯示工具提示
+mainButton.MouseEnter:Connect(function()
+    tooltip.Visible = true
+end)
+
+mainButton.MouseLeave:Connect(function()
+    tooltip.Visible = false
+end)
+
+-- 9. 自動檢測並記錄UI
+local function scanForUIs()
+    -- 每5秒掃描一次新UI
+    while true do
+        task.wait(5)
+        
+        if isHidden then
+            for _, gui in ipairs(PlayerGui:GetChildren()) do
+                if gui:IsA("ScreenGui") and gui.Name ~= "HideToggleBtn" and not hiddenUIs[gui] then
+                    hiddenUIs[gui] = gui.Enabled
+                    gui.Enabled = false
+                    print("🔍 發現新UI並隱藏:", gui.Name)
+                end
+            end
+        end
+    end
+end
+
+-- 啟動掃描
+coroutine.wrap(scanForUIs)()
+
+print("🎮 一鍵隱藏按鈕已載入！")
+print("📍 位置: 畫面右上角紅色圓形按鈕")
+print("🎯 功能: 點擊隱藏/顯示所有外掛UI")
+print("⌨️ 快捷鍵: F4")
+
+return hideBtn
