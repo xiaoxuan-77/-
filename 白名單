@@ -34,7 +34,7 @@ local Whitelist = {
     ["XanYU0322"] = "2c3fb464-46c4-4632-9368-28fd58a5d546",
     ["Sojater"] = "13c24503-d8fe-449a-91f1-094cf7fdf535",
     ["HYHuiBai"] = "b5388211-f375-49a3-8b47-c24625e4302b",
-    ["ziyao_1237"] = "51c46d19-3db1-481b-99a9-66c929d5fa0a",
+    ["ziyao_1237"] = "51c46d9-3db1-481b-99a9-66c925fa0a",
     [""] = "",
 }
 
