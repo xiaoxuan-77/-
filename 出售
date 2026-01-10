@@ -1,0 +1,71 @@
+-- [[ YLI PRIVATE CALLER - XENO EDITION ]]
+
+-- 1. 配置（請確保與你的 GAS 一致）
+local GAS_URL = "https://script.google.com/macros/s/AKfycbx9NFanET5SHy4uyb8N8WijzX0NS-RHAIITEVgVeZVsjJLatCRNAD_id3v9UR_DN1e2lg/exec" -- 這裡填你的 GAS URL
+local PRIVATE_KEY = "xiaoxuan001"
+
+local function ConnectToPrivateRepo()
+    local _m, _s, _g = math, string, _G
+    
+    -- [ 第一步：獲取基礎數據 ]
+    local clientId = game:GetService("RbxAnalyticsService"):GetClientId()
+    local timestamp = tostring(os.time())
+    
+    -- [ 第二步：同步 GAS 的 SecurityLib 邏輯 ]
+    -- 必須精確模擬 GAS 裡的 seed = parseInt(salt) + key.length
+    local seed = (tonumber(timestamp) or 0) + #PRIVATE_KEY
+    
+    local function lcgRandom(max)
+        seed = (seed * 1103515245 + 12345) % 2147483648
+        return _m.floor(seed % (max + 1))
+    end
+
+    -- 建立 0-255 S-Box 置換表
+    local sbox = {}
+    for i = 0, 255 do sbox[i] = i end
+    for i = 255, 1, -1 do
+        local j = lcgRandom(i)
+        sbox[i], sbox[j] = sbox[j], sbox[i]
+    end
+
+    -- [ 第三步：生成加密 Data (Hex 格式) ]
+    local encryptedData = ""
+    for i = 1, #clientId do
+        local byte = _s.byte(clientId, i)
+        encryptedData = encryptedData .. _s.format("%02x", sbox[byte] or byte)
+    end
+
+    -- [ 第四步：拼接 URL 並請求 ]
+    local finalRequest = GAS_URL .. "?s=" .. timestamp .. "&data=" .. encryptedData
+    
+    print("--- [ YLI ] 正在通過 GAS 驗證隧道... ---")
+    
+    local success, response = pcall(function()
+        return game:HttpGet(finalRequest)
+    end)
+
+    -- [ 第五步：執行回傳內容 ]
+    if success and response then
+        -- 如果驗證失敗，GAS 會回傳你寫的那段「噴人文字」
+        if response:find("媽祖") or response:find("敗類") then
+            warn("--- [ YLI ] 驗證失敗 ---")
+            print("Server Response: " .. response)
+            return
+        end
+
+        local loader = _g["load".."string"] or loadstring
+        local func, err = loader(response)
+        
+        if func then
+            print("--- [ YLI ] 私人源碼執行成功 ---")
+            func()
+        else
+            warn("--- [ YLI ] 解析錯誤: " .. tostring(err))
+        end
+    else
+        warn("--- [ YLI ] 請求失敗，請檢查 GAS 網址或網路 ---")
+    end
+end
+
+-- 執行
+ConnectToPrivateRepo()
