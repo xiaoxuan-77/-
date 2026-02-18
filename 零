@@ -32,7 +32,7 @@ main.Start = returnnil
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 	Title = "零脚本",
-	Text = "小轩制作",
+	Text = "sb小轩制作",
 	Duration = 5;
 })
 wait(0.1)
@@ -115,19 +115,19 @@ end)
 -- 缝合
 
 about:Button("飞行",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/fly"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 end)
 
 about:Button("法天象地",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/法天像地"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 end)
 
 about:Button("redz",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/redz"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 end)
 
 about:Button("皮脚本",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/皮"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 end)
 
 local VirtualUser = game:GetService("VirtualUser")
@@ -139,11 +139,11 @@ game:GetService("Players").LocalPlayer.Idled:Connect(function()
 end)
 
 about:Button("fps优化（关闭不了一点傻逼）",function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/fps优化"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 end)
 
 about:Button("hoho",function()
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果'))()
 end)
 
 -- 大佛功能区
@@ -337,104 +337,7 @@ end)
 task.spawn(function()
 	while true do
 		task.wait(1)
-		if not _ENV.rz_FastAttack then
-			warn("⚠️ 快速攻击组件未完全加载，持续尝试恢复...")
-			while not _ENV.rz_FastAttack do
-				task.wait(0.5)
-				if _G.FastAttack then
-					local Remotes, Net, RegisterAttack, RegisterHit, Enemies = CheckAndGetCoreComponents()
-					Module.FastAttack = Module.FastAttack or (function()
-						local FastAttack = {
-							Distance=2500,
-							attackMobs=true,
-							attackPlayers=true,
-							Equipped=nil,
-							IsRunning=_G.FastAttack,
-							consecutiveFailures=0,
-							maxConsecutiveFailures=5
-						}
-
-						local function ProcessEnemies(OthersEnemies, Folder)
-							if not Folder or not FastAttack.attackMobs then return nil end
-							local BasePart = nil
-							for _, Enemy in Folder:GetChildren() do
-								if Enemy == Player.Character or not IsAlive(Enemy) then continue end
-								local foundPart = GetRandomValidPart(Enemy)
-								if foundPart and Player:DistanceFromCharacter(foundPart.Position) < FastAttack.Distance then
-									table.insert(OthersEnemies, {Enemy, foundPart})
-									BasePart = foundPart
-								end
-							end
-							return BasePart
-						end
-
-						local function ProcessRealPlayers(OthersEnemies)
-							if not FastAttack.attackPlayers then return nil end
-							local BasePart = nil
-							for _, OtherPlayer in Players:GetPlayers() do
-								if OtherPlayer == Player then continue end
-								local OtherChar = OtherPlayer.Character
-								if not IsAlive(OtherChar) then continue end
-								local foundPart = GetRandomValidPart(OtherChar)
-								if foundPart and Player:DistanceFromCharacter(foundPart.Position) < FastAttack.Distance then
-									table.insert(OthersEnemies, {OtherChar, foundPart})
-									BasePart = foundPart
-								end
-							end
-							return BasePart
-						end
-
-						function FastAttack:Attack(BasePart, OthersEnemies)
-							local _, Net, temp_RegisterAttack, temp_RegisterHit, _ = CheckAndGetCoreComponents()
-							if not (BasePart and OthersEnemies and #OthersEnemies > 0 and temp_RegisterAttack and temp_RegisterHit) then
-								self.consecutiveFailures = self.consecutiveFailures + 1
-								if self.consecutiveFailures >= self.maxConsecutiveFailures then
-									self.consecutiveFailures = 0
-									self.Equipped = Player.Character and IsAlive(Player.Character) and Player.Character:FindFirstChildOfClass("Tool")
-								end
-								task.delay(0.5, function() self:AttackNearest() end)
-								return
-							end
-							self.consecutiveFailures = 0
-							temp_RegisterAttack:FireServer(Settings.ClickDelay or 0)
-							temp_RegisterHit:FireServer(BasePart, OthersEnemies)
-						end
-
-						function FastAttack:AttackNearest()
-							if not self.IsRunning then return end
-							local _, _, _, _, Enemies = CheckAndGetCoreComponents()
-							local OthersEnemies = {}
-							local Part1 = ProcessEnemies(OthersEnemies, Enemies)
-							local Part2 = ProcessRealPlayers(OthersEnemies)
-							if #OthersEnemies > 0 then
-								self:Attack(Part1 or Part2, OthersEnemies)
-							end
-						end
-
-						function FastAttack:BladeHits()
-							local Equipped = Player.Character and IsAlive(Player.Character) and Player.Character:FindFirstChildOfClass("Tool")
-							if Equipped and Equipped.ToolTip ~= "Gun" then
-								self:AttackNearest()
-							end
-						end
-
-						task.spawn(function()
-							while true do
-								task.wait(Settings.ClickDelay)
-								if Settings.AutoClick and FastAttack.IsRunning then
-									FastAttack:BladeHits()
-								else
-									task.wait(0.1)
-								end
-							end
-						end)
-
-						_ENV.rz_FastAttack = FastAttack
-						return FastAttack
-					end)()
-				end
-			end
-		end
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/xiaoxuan-77/-/refs/heads/main/自動抽果"))()
 	end
 end)
 
