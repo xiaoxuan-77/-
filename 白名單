@@ -10,21 +10,21 @@ local hwid = game:GetService("RbxAnalyticsService"):GetClientId()
 
 -- 【白名單資料庫】 玩家名字 = "HWID"
 local Whitelist = {
-    ["Kadys5373"] = "81666c76-8532-4e22-87a8-42f066b9e25f",
-    ["dt106101zz"] = "B2E1BD72-7B8F-4C4F-AEF7-2371ECDB2D2A",
-    ["166788cx"] = "0d6507ae-6b6f-4717-a987-22dee4f027fc",
-    ["mknhghv"] = "37b57179-8bd6-45d9-bb00-da47744f7412",
-    ["suedrr4"] = "a3911e1b-174e-4b3e-9821-2003d99a2203",
-    ["msmskven3"] = "c36ce557-a7fc-43d1-8c80-4a5d3102bf7b",
-    ["jay04_23"] = "f0f83cc1-8fec-4c11-a30d-c62eed7e4b23",
+    ["Kadys5487"] = "81666c76-8532-4e22-87a8-42f066b9ef",
+    ["dt106101zz"] = "B2E1BD72-7B8F-4C4F-AEF7-2371EC2D2A",
+    ["166788cx"] = "0d6507ae-6b6f-4717-a987-22dee27fc",
+    ["mknhghv"] = "37b57179-8bd6-45d9-bb00-da4f7412",
+    ["suedrr4"] = "a3911e1b-174e-4b3e-9821-20046d99a2203",
+    ["msmskven3"] = "c36ce557-a7fc-43d1-8c80-4ad645102bf7b",
+    ["jay04_23"] = "f0f83cc1-8fec-4c11-a30d-c62577e4b23",
     ["psaabfmiuh"] = "b554580a-ccb7-4607-9891-148c42819139",
-    ["robloxasdft114"] = "157B7145-67B6-4479-924C-93210FD77CD0",
-    ["Zn6xx"] = "e8ac1481-dccd-48bb-8ee0-50e39dce13e8",
-    ["Timmy112406"] = "BCD8874D-08B6-4FF6-9C6D-D4A481052FDE",
-    ["qwertyio_feee"] = "6986a755-18e5-4f5a-bb7e-ab134d2611ac",
-    ["bonk_111111111"] = "39e4653f-ed82-42be-97ba-bb13cdcbebe1",
-    ["XanYU0322"] = "2c3fb464-46c4-4632-9368-28fd58a5d546",
-    ["ziyao_1237"] = "51c46d9-3db1-481b-99a9-66c925fa0a",
+    ["robloxasdft114"] = "157B7145-67B6-4479-92456-93210FD77CD0",
+    ["Zn6xx"] = "e8ac1481-dccd-48bb-8ee0-50e36565dce13e8",
+    ["Timmy112406"] = "BCD8874D-08B6-4FF6-9844D-D4A481052FDE",
+    ["qwertyio_feee"] = "6986a755-18e5-4f48945-ab134d2611ac",
+    ["bonk_111111111"] = "39e4653f-ed82-42516516be-97ba-bb13cdcbebe1",
+    ["XanYU0322"] = "2c3fb464-46c4-4632-1568-28fd58a5d546",
+    ["ziyao_1237"] = "51c46d9-3db1-481b-89a9-66c925fa0a",
 }
 
 -- 認證函數
